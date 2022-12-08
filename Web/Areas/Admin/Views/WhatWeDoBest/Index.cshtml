@@ -1,0 +1,35 @@
+﻿@using WebApp.ViewModels.WhatWeDoBest;
+@model WhatWeDoBestIndexVM
+<a class="btn btn-warning" asp-action="create" asp-controller="whatwedobest">Create</a>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Modified At</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var component in Model.WhatWeDoBests)
+        {
+
+            <tr>
+                <td>@component.Id</td>
+                <td>@component.Title</td>
+                <td>@component.Description</td>
+                <td>@component.CreatedAt.ToShortDateString();</td>
+                <td>@component.ModifiedAt.ToShortDateString();</td>
+                <td>
+                    <form asp-route-id="@component.Id" method="get" asp-action="delete" asp-controller="whatwedobest">
+                        <input id="Id" name="Id" value="@component.Id" type="hidden" />
+                        <button type="submit" class="btn btn-danger mb-2">Delete</button>
+                    </form>
+                    <a class="btn btn-primary" asp-action="update" asp-controller="whatwedobest" asp-route-id="@component.Id">Update</a>
+                </td>
+            </tr> }
+    </tbody>
+</table>
